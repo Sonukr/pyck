@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+
+  <head>
+    <script data-require="angular.js@1.5.6" data-semver="1.5.6" src="https://code.angularjs.org/1.5.6/angular.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+    <style>
+
+    </style>
+  </head>
+  <nav class="navbar navbar-default">
+    <div class="container container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          Company Name
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <body ng-controller="main">
+
+      <div class="container">
+        <div class="row">
+          <h4>Search for another shipment</h4>
+          <form role="search">
+            <div class="col-md-5">
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">Waybill</span>
+                <input type="text" class="form-control" placeholder="Waybill no" aria-describedby="sizing-addon1" ng-model="wb">
+              </div>
+            </div>
+            <div class="col-md-5">
+              <div class="input-group input-group-lg">
+                <span class="input-group-addon" id="sizing-addon1">CP_id</span>
+                <input type="text" class="form-control" placeholder="CP_id" aria-describedby="sizing-addon1" ng-model="cp">
+              </div>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-success btn-lg" ng-click="search()">Search</button>
+            </div>
+          </form>
+        </div>
+        <div class="row">
+          <div class="bar"></div>
+          <div class="timeline1" ng-repeat= "package in packages">
+          <h1 ng-if="package.valid == false">{{message}}</h1>
+             <div class="entry" ng-repeat="t in package.scans | orderBy:'':true ">
+
+                  <p> - Current Status -  </p>
+                 <p>{{t.remark}}</p>
+                 <p>{{t.status}} {{t.location}}</p>
+                 <p>On : {{t.timestamp | date:'dd/MM/yyyy @ h:mma'}}</p>
+                 <p>{{t.clickpost_status_description}}</p>
+                 <p></p>
+             </div>
+          </div>
+        </div>
+      </div>
+        <h4 class="text-center"> Second Option</h4>
+      <div class="timeline">
+        <ul ng-repeat= "package in packages">
+          <li ng-repeat="t in package.scans | orderBy:'':true ">
+            <div>
+
+                <p> - Current Status -  </p>
+               <p>{{t.remark}}</p>
+               <p>{{t.status}} {{t.location}}</p>
+               <p>On : {{t.timestamp | date:'dd/MM/yyyy @ h:mma'}}</p>
+               <p>{{t.clickpost_status_description}}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+  </body>
+
+
+
+<script>
+
+</script>
+</html>
